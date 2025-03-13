@@ -1,0 +1,11 @@
+# 除外するファイル
+vendor/
+node_modules/
+.DS_Store
+*.log
+*.cache
+__pycache__/
+
+# 必ず含めるファイル
+!service-account.json
+

@@ -1,0 +1,39 @@
+services:
+  php:
+    image: php:8.2-apache
+    container_name: php_app_douga
+    ports:
+      - "8006:80"
+    volumes:
+      - ./app:/var/www/html
+      - ./php.ini:/usr/local/etc/php/conf.d/upload-limits.ini
+    depends_on:
+      - db_douga  # 変更！
+
+  db_douga:  # ← ここを変更！（元は db）
+    image: mysql:8.0
+    container_name: mysql_douga  # ← これも変更！
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: douga_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"  # ← 3306 だと他のプロジェクトと被るので 3307 に変更！
+    volumes:
+      - db_douga_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_douga  # ← 変更！
+    restart: always
+    ports:
+      - "8082:80"  # ← 他のプロジェクトと被らないように 8082 に！
+    environment:
+      PMA_HOST: db_douga  # ← ここも変更！
+      MYSQL_ROOT_PASSWORD: root
+      PMA_ARBITRARY: 1
+
+volumes:
+  db_douga_data:  # ← ここも変更！
