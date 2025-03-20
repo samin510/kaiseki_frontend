@@ -37,7 +37,7 @@ define('DATA_ANALYSIS_SHEET_URL', 'https://docs.google.com/spreadsheets/d/1wY4au
             </div>
             <span class="tab-text">動画解析</span>
         </a>
-        <a href="structure_creation.php" class="tab">
+        <a href="" class="tab">
             <div class="tab-icon">
                 <img src="/static/images/puzzle.png" alt="構成案作成">
             </div>
